@@ -1,0 +1,36 @@
+﻿@model List<Item>
+
+<div class="containter">
+    <div class="row pt-4 pb-2">
+        <div class="col-6">
+            <h2 class="text-primary">
+                Items List
+            </h2>
+        </div>
+       
+    </div>
+<table class="table table-bordered table-str">
+    <thead>
+        <tr>
+            <th>Items Name</th>
+            <th>Price</th>
+           
+        </tr>
+    </thead>
+
+    <tbody>
+    @foreach(var obj in Model)
+    {
+        <tr>
+            <td>
+                @obj.ItemName
+            </td>
+            <td>
+                @obj.Price.ToString("0.00") zł
+            </td>
+            
+        </tr>
+    }
+    </tbody>
+</table>
+</div>
