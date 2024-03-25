@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SimpleCRUDApp.Data;
 using SimpleCRUDApp.Models;
+using System.Net;
 
 namespace SimpleCRUDApp.Controllers
 {
@@ -36,6 +37,21 @@ namespace SimpleCRUDApp.Controllers
 
             }
             return View(item);
+        }
+
+
+        public IActionResult Edit(int? id)
+        {
+            if(id == null || id == 0)
+            {
+                return NotFound(id);
+            }
+            Item? itemFromDatabase = _database.Items.FirstOrDefault(x => x.Id == id);
+            if(itemFromDatabase == null)
+            {
+                return NotFound(id);
+            }
+            return View(itemFromDatabase);
         }
 
     }
