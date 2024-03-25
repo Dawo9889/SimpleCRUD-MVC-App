@@ -53,6 +53,45 @@ namespace SimpleCRUDApp.Controllers
             }
             return View(itemFromDatabase);
         }
+        [HttpPost, ActionName("Edit")]
+        public IActionResult EditPOST(Item item)
+        {
+            if (ModelState.IsValid)
+            {
+                _database.Items.Update(item);
+                _database.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(item);
+        }
+
+
+        public IActionResult Delete(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound(id);
+            }
+            Item? itemFromDatabase = _database.Items.FirstOrDefault(x => x.Id == id);
+            if (itemFromDatabase == null)
+            {
+                return NotFound(id);
+            }
+            return View(itemFromDatabase);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public IActionResult DeletePOST(int? id)
+        {
+            Item? itemFromDb = _database.Items.Where(x => x.Id == id).FirstOrDefault();
+            if (itemFromDb == null)
+            {
+                return NotFound(id);
+            }
+            _database.Items.Remove(itemFromDb);
+            _database.SaveChanges();
+            return RedirectToAction("Index");
+        }
 
     }
 }
