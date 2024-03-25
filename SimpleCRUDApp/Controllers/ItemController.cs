@@ -18,5 +18,25 @@ namespace SimpleCRUDApp.Controllers
             List<Item> items = _database.Items.ToList();
             return View(items);
         }
+
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Item item)
+        {
+            if(ModelState.IsValid) 
+            { 
+                _database.Items.Add(item);
+                _database.SaveChanges();
+                return RedirectToAction("Index");
+
+            }
+            return View(item);
+        }
+
     }
 }
