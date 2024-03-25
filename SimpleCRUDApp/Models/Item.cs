@@ -13,7 +13,7 @@ namespace SimpleCRUDApp.Models
         [DisplayName("Item name")]
         public string? ItemName { get; set; }
         [Required]
-        [Range(0,10000)]
+
         [Column(TypeName = "decimal(18,4)")]
         public decimal Price { get; set; }
 
